@@ -3,7 +3,7 @@ from products.models import Item
 
 # Create your views here.
 
-def index(request)
+def index(request):
 
     products = Item.objects.all()
     context = {
@@ -11,3 +11,4 @@ def index(request)
     }
     return render(request, "home.html", context=context)
 
+}
