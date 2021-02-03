@@ -4,7 +4,7 @@ from django.db import models
 from django.shortcuts import reverse
 
 
-# Create Categroy Choices for Menu
+# Create Category Choices for Menu
 
 CATEGORY_CHOICES = (
     ('SND', 'SUNDAES'),
