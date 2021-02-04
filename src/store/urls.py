@@ -18,9 +18,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from home.views import index, search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/index/', index, name='index'),
+    path('home/search/', search, name='search'),
 ]
 
 if settings.DEBUG:
