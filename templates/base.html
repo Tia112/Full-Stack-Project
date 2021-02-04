@@ -71,11 +71,14 @@
     {% block extra_body %}
     {% endblock %}
 
-    {% include "footer.html" %}
     {% include "scripts.html" %}
 
-    {% block extra_scripts %}
-    {% endblock extra_scripts %}
+<script type="text/javascript" src="{% static 'js/query-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>
