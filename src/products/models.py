@@ -10,7 +10,7 @@ CATEGORY_CHOICES = (
     ('SND', 'SUNDAES'),
     ('WFF', 'WAFFLES'),
     ('CRP', 'CREPES'),
-    ('COK', 'COOKIES'),
+    ('CHK', 'CHEESECAKE'),
     ('CKS', 'CAKES'),
     ('MLK', 'MILKSHAKES')
 )
