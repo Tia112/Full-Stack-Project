@@ -17,6 +17,16 @@ CATEGORY_CHOICES = (
 
 # Create your models here.
 
+# Definition for User Profile
+class UserProfile(models.Model):
+    user = models.OnetoOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    )
+
+ def __str__(self):
+        return self.title
+
+# Defining product item model
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
