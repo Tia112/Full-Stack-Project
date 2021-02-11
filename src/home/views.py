@@ -1,21 +1,21 @@
 from django.shortcuts import render
-from products.models import Item
+from django.views.generic import ListView, DetailView, View
 
-# Create your views here.
+
+from products.models import Product
+
 
 def index(request):
-
-    products = Item.objects.all()
+    products = Product.objects.all()
     context = {
         'products': products
     }
     return render(request, "home.html", context=context)
 
-# Search function for Navbar
-def search(request):
 
+def search(request):
     search_text = request.POST.get('search')
-    products = item.objects.filter(title_icontains=search_text)
+    products = Product.objects.filter(title__icontains=search_text)
     context = {
         'products': products
     }

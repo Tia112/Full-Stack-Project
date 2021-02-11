@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+r706-c)7gy*1eltie4pc6@pw49dxy(bxu!p7p=^jpm25p(jqt'
+SECRET_KEY = ')#i0kptr#l2rdn0&vm*v!+u6uxizn_c#yh5m1@mzs9s(+&90b#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,14 +38,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # User-defined Apps
+    #user defined apps
     'accounts',
     'cart',
-    'order',
     'home',
+    'order',
     'payment',
-    'products'
+    'products',
 
+    #pre-built apps
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'crispy_forms',
+    'django_countries',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +138,17 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STRIPE_PUBLIC_KEY = "pk_test_wkCw8NVZ7ErSdGxrAMfFKn1W00UTU2CEXS"
+STRIPE_SECRET_KEY = "sk_test_gZBOSaGJv6NONeYAhUE2eqNP006mtTjdSh"

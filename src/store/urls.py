@@ -22,8 +22,9 @@ from home.views import index, search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/index/', index, name='index'),
-    path('home/search/', search, name='search'),
+    path('accounts/', include('allauth.urls')),
+    path('', index, name='index'),
+    path('search/', search, name='search'),
 ]
 
 if settings.DEBUG:
