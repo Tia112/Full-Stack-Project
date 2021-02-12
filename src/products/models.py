@@ -22,7 +22,7 @@ class Product(models.Model):
     image = models.ImageField()
     price = models.FloatField(default=0.00, blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
 
     def __str__(self):
         return self.title
