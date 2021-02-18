@@ -46,28 +46,3 @@ class OrderItem(models.Model):
     def get_total(self):
         return self.get_sub_total()
 
-
-class Order(models.Model):
-    user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
-    ref_code = models.CharField(max_length=25, blank=True, null=True)
-    items = models.ManyToManyField(OrderProduct)
-    date_ordered = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
-    shipping_address = models.ForeignKey(
-        Address, related_name='shipping_address', on_delete=models.CASCADE, blank=True, null=True)
-    billing_address = models.ForeignKey(
-        Address, related_name='billing_address', on_delete=models.CASCADE, blank=True, null=True)
-    payment = models.ForeignKey(
-        Payment, on_delete=models.CASCADE(), blank=True, null=True)
-    being_delivered = models.BooleanField(default=False)
-    received = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user.username
-
-    def get_total(self):
-        total = 0
-        for order_item in self.items.all():
-            total += order_item.get_total()
-        return total
-
