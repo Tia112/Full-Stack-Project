@@ -49,10 +49,9 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
-    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    ref_code = models.CharField(max_length=25, blank=True, null=True)
     items = models.ManyToManyField(OrderProduct)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    date_ordered = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
         Address, related_name='shipping_address', on_delete=models.CASCADE, blank=True, null=True)
