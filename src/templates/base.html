@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>{% block head_title %}{% endblock %}</title>
@@ -44,10 +45,10 @@
   </style>
 </head>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color lighten-3 scrolling-navbar">
     <div class="container">
       <a class="navbar-brand waves-effect" href="/">
-        <strong class="brown-text">Dessert Hub</strong>
+        <strong class="white-text">ChocoStore</strong>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,10 +66,47 @@
             Checkout</a>
           </li> {% endcomment %}
         </ul>
+      <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">All
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sundaes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Waffles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Crepes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cheesecakes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cakes</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="#">Milkshakes</a>
+            </li>
+            </ul>
+          <!-- Links -->
+
+          <form action="{% url 'search' %}" method="POST" class="form-inline">
+            <div class="md-form my-0">
+              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        &nbsp;&nbsp;
         <ul class="navbar-nav nav-flex-icons">
           {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a href="#" class="nav-link waves-effect">
+            <a href="{% url 'order-summary' %}" class="nav-link waves-effect">
               <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
@@ -98,7 +136,7 @@
   </nav>
 
 <body>
-
+<img src="{% static 'img/background.jpg' %}" style="width:100%;height:350px;">
     <div class="mt-5 pt-4">
     {% if messages %}
         {% for message in messages %}
@@ -129,5 +167,24 @@
 
     {% block extra_scripts %}
     {% endblock extra_scripts %}
+<footer class="page-footer text-center font-small  wow fadeIn mdb-color lighten-3" >
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+
+<a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <i class="fab fa-codepen mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
 </body>
 </html>

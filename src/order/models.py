@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
-from payment.models import Payment
+"""from payment.models import Payment"""
 from products.models import Product
 
 
@@ -33,7 +33,7 @@ class Address(models.Model):
 
 class OrderItem(models.Model):
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
-    order = models.BooleanField(default=False)
+    order = models.BooleanField(related_name='order_item', default=False)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     qty = models.IntegerField(default=1, blank=True, null=True)
 
@@ -51,21 +51,21 @@ class Order(models.Model):
     order_ref = models.CharField(max_length=20, blank=True, null=True)
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
     shipping_address = models.ForeignKey(
-        Address, on_delete=models.CASCADE, blank=True, null=True)
+        Address, related_name='shipping_address', on_delete=models.CASCADE, blank=True, null=True)
     billing_address = models.ForeignKey(
-        Address, on_delete=models.CASCADE, blank=True, null=True)
+        Address, related_name='billing_address', on_delete=models.CASCADE, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE(), blank=True, null=True)
+""" payment = models.ForeignKey(Payment, on_delete=models.CASCADE(), blank=True, null=True)
     delivery_progress = models.BooleanField(default=False)
-    received = models.BooleanField(default=False)
+    received = models.BooleanField(default=False)"""
 
-    def __str__(self):
-        return self.user.username
+def __str__(self):
+     return self.user.username
 
-    def get_total(self):
-        total = 0
-        for order_item in self.items.all():
-            total += order_item.get_total()
-        return total
+def get_total(self):
+    total = 0
+    for order_item in self.items.all():
+        total += order_item.get_total()
+    return total

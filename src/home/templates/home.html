@@ -1,58 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+
   <main>
+
     <div class="container">
 
-      <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
-
-        <!-- Navbar brand -->
-        <span class="navbar-brand">Categories:</span>
-
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="basicExampleNav">
-
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-              <a class="nav-link" href="#">WAFFLES</a>
-              <li class="nav-item">
-              <a class="nav-link" href="#">CREPES</a>
-              <li class="nav-item">
-              <a class="nav-link" href="#">SUNDAES</a>
-              <li class="nav-item">
-              <a class="nav-link" href="#">CAKES</a>
-              <li class="nav-item">
-              <a class="nav-link" href="#">MILKSHAKES</a>
-            </li>
-          </ul>
-          <!-- Links -->
-           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">All
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-
-          <form action="{% url 'search' %}" method="POST" class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
-        </div>
-        <!-- Collapsible content -->
-
-      </nav>
-      <!--/.Navbar-->
-
-      <!--Section-->
+      <!--Section: Products-->
       <section class="text-center mb-4">
 
         <div class="row wow fadeIn">
@@ -64,8 +18,8 @@
 
               <div class="view overlay">
                 {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" {% endcomment %}
-                <img src="{{ item.image.url }}" class="card-img-top">
-                <a href="{{ item.get_absolute_url }}">
+                <img src="{{ item.image.url }}" class="card-img-top" align="center" style="width:100%;height:230px;">
+                <a href="{{ item.absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
@@ -76,21 +30,13 @@
                 </a>
                 <h5>
                   <strong>
-                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                     </a>
-                     <p></p>
-                      <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.description }}
-                     </a>
+                    <a href="{{ item.absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
                   <strong>£
-                  {% if item.discount_price %}
-                  {{ item.discount_price }}
-                  {% else %}
                   {{ item.price }}
-                  {% endif %}
                   </strong>
                 </h4>
 
@@ -103,6 +49,8 @@
         </div>
 
       </section>
+      <!--Section: Products -->
+
       <!--Pagination-->
 
       {% if is_paginated %}
