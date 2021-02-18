@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', index, name='index'),
-    path('search/', search, name='search'),
+    path('search/', search, name='search')
 ]
 
 if settings.DEBUG:
