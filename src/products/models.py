@@ -2,6 +2,9 @@
 
 from django.db import models
 from django.shortcuts import render, reverse
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
 
 # Create Category Choices for Menu
 

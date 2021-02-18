@@ -20,3 +20,9 @@ def search(request):
         'products': products
     }
     return render(request, "home.html", context=context)
+
+
+class HomeView(ListView):
+    model = Item
+    paginate_by =10
+    template_name = "home.html"
