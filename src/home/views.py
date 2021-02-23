@@ -19,4 +19,4 @@ def search(request):
     context = {
         'products': products
     }
-    return render(request, "home.html", context=context
+    return render(request, "home.html", context=context)

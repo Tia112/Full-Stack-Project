@@ -44,7 +44,7 @@ class Order(models.Model):
     products = models.ManyToManyField(OrderProduct)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    delivery_address = models.ForeignKey(Address, related_name='delievery_address', on_delete=models.CASCADE,
+    delivery_address = models.ForeignKey(Address, related_name='delivery_address', on_delete=models.CASCADE,
                                          blank=True, null=True)
     payment = models.ForeignKey(
         Payment, on_delete=models.CASCADE, blank=True, null=True)

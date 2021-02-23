@@ -95,3 +95,78 @@ delivery_address_queryset = Address.objects.filter(
         except ObjectDoesNotExist:
             messages.warning(self.request, "You don't have an active order")
             return redirect("order-summary")
+
+""" Payment Page with Stripe"""
+
+class PaymentPage(View):
+    def get(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        if order.delivery_address:
+            context = {
+                'order': order,
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
+            }
+            userprofile = self.request.user.user
+            if userprofile.one_click_purchase:
+                cards = stripe.Customer.list_sources(userprofile.customer_id,limit=3,object='card')
+                card_list = cards['data']
+                if len(card_list) > 0:
+                    context.update({
+                        'card': card_list[0]
+                    })
+            return render(self.request, "payment.html", context)
+        else:
+            messages.warning(
+                self.request, "No Billing Address Added")
+            return redirect("checkout")
+
+def post(self, *args, **kwargs):
+
+        form = PaymentForm(self.request.POST)
+
+        userprofile = User.objects.get(user=self.request.user)
+        if form.is_valid():
+            data = form.cleaned_data
+            token = data.get('stripeToken')
+            save = data.get('save')
+            use_default = data.get('use_default')
+
+            if save:
+                if userprofile.customer_id != '' and userprofile.customer_id is not None:
+                    customer = stripe.Customer.retrieve(userprofile.customer_id)
+                    customer.sources.create(source=token)
+
+                else:
+                    customer = stripe.Customer.create(email=self.request.user.email,)
+                    customer.sources.create(source=token)
+                    userprofile.stripe_customer_id = customer['id']
+                    userprofile.one_click_purchase = True
+                    userprofile.save()
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            amount = int(order.get_total() * 100)
+
+            try:
+                if use_default or save:
+                    charge = stripe.Charge.create(amount=amount,currency="gbp",customer=userprofile.stripe_customer_id)
+                else:
+                    charge = stripe.Charge.create(amount=amount,currency="gbp",source=token)
+
+
+                payment = Payment()
+                payment.stripe_bill_id = charge['id']
+                payment.user = self.request.user
+                payment.amt = order.get_total()
+                payment.save()
+
+                order_items = order.products.all()
+                order_items.update(ordered=True)
+                for item in order_items:
+                    item.save()
+
+                order.ordered = True
+                order.payment = payment
+                order.orderid = generate_order_id()
+                order.save()
+
+                messages.success(self.request, "Your order was successful!")
+                return redirect("/")

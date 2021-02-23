@@ -25,6 +25,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', index, name='index'),
     path('search/', search, name='search')
+    path('product/<slug>/', ProductDetailView.as_view(), name='product'),
+    path('payment/<payment_option>/', PaymentPage.as_view(), name='payment'),
 ]
 
 if settings.DEBUG:
