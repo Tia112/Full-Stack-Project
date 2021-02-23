@@ -10,7 +10,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Item</th>
+            <th scope="col">Item title</th>
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total Item Price</th>
@@ -37,11 +37,11 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan='5'>Your cart is Empty</td>
+            <td colspan='5'>Your cart is empty</td>
         </tr>
         <tr>
             <td colspan="5">
-            <a class='btn btn-primary float-right' href='/'>Continue Shopping</a>
+            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
             </td>
         </tr>
         {% endfor %}
@@ -52,8 +52,8 @@
         </tr>
         <tr>
             <td colspan="5">
-            <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to Checkout</a>
-            <a class='btn btn-primary float-right' href='/'>Continue Shopping</a>
+            <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to checkout</a>
+            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
             </td>
         </tr>
         {% endif %}

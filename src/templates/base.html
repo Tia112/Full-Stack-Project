@@ -68,7 +68,7 @@
         </ul>
       <div class="collapse navbar-collapse" id="basicExampleNav">
 
-          <!-- Links -->
+        <!-- Links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">All
@@ -76,27 +76,27 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sundaes</a>
+              <a class="nav-link" href="/category/SND/">Sundaes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Waffles</a>
+              <a class="nav-link" href="/category/WFF/">Waffles</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Crepes</a>
+              <a class="nav-link" href="/category/CRP/">Crepes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cheesecakes</a>
+              <a class="nav-link" href="/category/CHK/">Cheesecakes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cakes</a>
+              <a class="nav-link" href="/category/CKS/">Cakes</a>
             </li>
               <li class="nav-item">
-              <a class="nav-link" href="#">Milkshakes</a>
+              <a class="nav-link" href="/category/MLK/">Milkshakes</a>
             </li>
             </ul>
           <!-- Links -->
 
-          <form action="{% url 'search' %}" method="POST" class="form-inline">
+          <form action="{% url 'search' %}" method="POST" class="form-inline">{% csrf_token %}
             <div class="md-form my-0">
               <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
             </div>
@@ -136,7 +136,9 @@
   </nav>
 
 <body>
-<img src="{% static 'img/background.jpg' %}" style="width:100%;height:350px;">
+{% block backimage %}
+{% endblock backimage %}
+
     <div class="mt-0 pt-4">
     {% if messages %}
         {% for message in messages %}

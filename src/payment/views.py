@@ -46,8 +46,8 @@ delivery_address_queryset = Address.objects.filter(
             order = Order.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
                 data = form.cleaned_data
-                use_default_delievery = data.get('use_default_delievery')
-                if use_default_delievery:
+                use_default_delivery = data.get('use_default_delivery')
+                if use_default_delivery:
                     address_queryset = Address.objects.filter(user=self.request.user,default=True)
                     if address_queryset.exists():
                         delivery_address = address_queryset[0]
@@ -61,15 +61,15 @@ delivery_address_queryset = Address.objects.filter(
                     street_address1 = data.get('street_address1')
                     street_address2 = data.get('street_address2')
                     shipping_country = data.get('shipping_country')
-                    postal_code = data.get('postal_code')
+                    post_code = data.get('post_code')
 
-                    if is_form_valid([street_address1, shipping_country, postal_code]):
+                    if is_form_valid([street_address1, shipping_country, post_code]):
                         delivery_address = Address(
                             user=self.request.user,
                             street_address=street_address1,
                             apartment_address=street_address2,
                             country=shipping_country,
-                            postal_code=postal_code
+                            post_code=post_code
                         )
                         delivery_address.save()
 
@@ -168,5 +168,37 @@ def post(self, *args, **kwargs):
                 order.orderid = generate_order_id()
                 order.save()
 
-                messages.success(self.request, "Your order was successful!")
+                messages.success(self.request, "Your order was Successful!")
                 return redirect("/")
+   except stripe.error.CardError as e:
+                body = e.json_body
+                err = body.get('error', {})
+                messages.warning(self.request, f"{err.get('message')}")
+                return redirect("/")
+
+            except stripe.error.RateLimitError as e:
+                messages.warning(self.request, "Rate limit error")
+                return redirect("/")
+
+            except stripe.error.InvalidRequestError as e:
+                messages.warning(self.request, "Invalid parameters")
+                return redirect("/")
+
+            except stripe.error.AuthenticationError as e:
+                messages.warning(self.request, "Not authenticated")
+                return redirect("/")
+
+            except stripe.error.APIConnectionError as e:
+                messages.warning(self.request, "Network error")
+                return redirect("/")
+
+            except stripe.error.StripeError as e:
+                messages.warning(self.request, "Something went wrong. Please try again. You haven't been Charged")
+                return redirect("/")
+
+            except Exception as e:
+                messages.warning(self.request, "A serious issue occurred. We have been notifed.")
+                return redirect("/")
+
+        messages.warning(self.request, "Invalid data received")
+        return redirect("/payment/stripe/")

@@ -1,5 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block backimage %}
+{% if products %}
+<div class="mt-5 pt-4"></div>
+{% else %}
+<img src="{% static 'img/background.jpg' %}" style="width:100%;height:350px;">
+{% endif %}
+{% endblock backimage %}
 {% block content %}
 
   <main>
@@ -8,7 +16,7 @@
 
       <!--Section: Products-->
       <section class="text-center mb-4">
-
+        {% if products %}
         <div class="row wow fadeIn">
 
           {% for item in products %}
@@ -47,9 +55,22 @@
           </div>
           {% endfor %}
         </div>
+      {% else %}
+        <h1><strong>Desserts Capital</strong></h1>
+        <div class="row">
 
+          <div class="col-6">
+            Welcome to Desserts Capital!  Curated to be the pinnacle of the finest desserts anywhere.
+	          We are the Desserts Capital of the World.  We offer a truly unique dessert experience with finely balanced
+            ingredients, with touch of elegance!
+            Choose from a number of flavours of ice cream in many different cones, wafers and tubs, or why not try one
+	          of our delicious waffles, milkshakes, crepes, sundaes or cheesecakes...
+          </div>
+        <div class="col-6"><img src="{% static 'img/shop.jpeg' %}" style="width:300px;height:200px;"></div>
+        </div>
+      {% endif %}
       </section>
-      <!--Section: Products -->
+      <!--Section: Products-->
 
       <!--Pagination-->
 

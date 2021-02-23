@@ -12,16 +12,13 @@ from order.models import OrderProduct, Order, Address
 def add_to_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
     order_product, created = OrderProduct.objects.get_or_create(
-        product=product,
-        user=request.user,
-        ordered=False
-    )
+        product=product, user=request.user, ordered=False)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         # check if the order product is in the order
         if order.products.filter(product__slug=product.slug).exists():
-            order_product.quantity += 1
+            order_product.qty += 1
             order_product.save()
             messages.info(request, "Product quantity was updated.")
             return redirect("order-summary")
@@ -41,19 +38,13 @@ def add_to_cart(request, slug):
 @login_required
 def remove_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        ordered=False
-    )
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         # check if the order product is in the order
         if order.products.filter(product__slug=product.slug).exists():
             order_product = OrderProduct.objects.filter(
-                product=product,
-                user=request.user,
-                ordered=False
-            )[0]
+                product=product, user=request.user, ordered=False)[0]
             order.products.remove(order_product)
             order_product.delete()
             messages.info(request, "Product removed to cart.")
@@ -69,21 +60,15 @@ def remove_from_cart(request, slug):
 @login_required
 def remove_single_item_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        ordered=False
-    )
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         # check if the order product is in the order
         if order.products.filter(product__slug=product.slug).exists():
             order_product = OrderProduct.objects.filter(
-                product=product,
-                user=request.user,
-                ordered=False
-            )[0]
-            if order_product.quantity > 1:
-                order_product.quantity -= 1
+                product=product, user=request.user, ordered=False)[0]
+            if order_product.qty > 1:
+                order_product.qty -= 1
                 order_product.save()
             else:
                 order.products.remove(order_product)
