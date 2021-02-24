@@ -1,17 +1,17 @@
 # Import Django libraries
 
 from django.db import models
-from django.shortcuts import render, reverse
+from django.shortcuts import render,reverse
 
 # Create Category Choices for Menu
 
 CATEGORY_CHOICES = (
-    ('SND', 'SUNDAES'),
-    ('WFF', 'WAFFLES'),
-    ('CRP', 'CREPES'),
-    ('CHK', 'CHEESECAKE'),
-    ('CKS', 'CAKES'),
-    ('MLK', 'MILKSHAKES')
+    ('SN', 'SUNDAES'),
+    ('WF', 'WAFFLES'),
+    ('CP', 'CREPES'),
+    ('CK', 'CHEESECAKE'),
+    ('CS', 'CAKES'),
+    ('MK', 'MILKSHAKES')
 )
 
 # Defining product item model

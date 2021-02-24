@@ -1,5 +1,12 @@
+import stripe
 from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect, render
+from django.views.generic import View
+from .forms import CheckoutForm, PaymentForm
+import random
+import string
 
 from accounts.models import User
 from order.models import OrderProduct, Order, Address
@@ -29,11 +36,9 @@ class Checkout(View):
             }
 
 
-delivery_address_queryset = Address.objects.filter(
-    user=self.request.user, default=True)
+            delivery_address_queryset = Address.objects.filter(user=self.request.user, default=True)
             if delivery_address_queryset.exists():
-                context.update(
-                    {'default_delivery_address': delivery_address_queryset[0]})
+                context.update({'default_delivery_address': delivery_address_queryset[0]})
             return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You don't have an Active Order")
@@ -170,7 +175,7 @@ def post(self, *args, **kwargs):
 
                 messages.success(self.request, "Your order was Successful!")
                 return redirect("/")
-   except stripe.error.CardError as e:
+            except stripe.error.CardError as e:
                 body = e.json_body
                 err = body.get('error', {})
                 messages.warning(self.request, f"{err.get('message')}")
