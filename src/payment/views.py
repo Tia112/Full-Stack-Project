@@ -125,7 +125,7 @@ class PaymentPage(View):
                 self.request, "No Billing Address Added")
             return redirect("checkout")
 
-def post(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
 
         form = PaymentForm(self.request.POST)
 

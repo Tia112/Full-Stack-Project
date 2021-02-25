@@ -53,7 +53,9 @@
             </div>
 
           </div>
-          {% endfor %}
+          {% empty %}
+          <h1> Nothing found </h1>
+           {% endfor %}
         </div>
       {% else %}
         <h1><strong>Desserts Capital</strong></h1>
@@ -66,7 +68,7 @@
             Choose from a number of flavours of ice cream in many different cones, wafers and tubs, or why not try one
 	          of our delicious waffles, milkshakes, crepes, sundaes or cheesecakes...
           </div>
-        <div class="col-6"><img src="{% static 'img/shop.jpeg' %}" style="width:300px;height:200px;"></div>
+        <div class="col-6"><img src="{% static 'img/shop.png' %}" style="width:300px;height:200px;"></div>
         </div>
       {% endif %}
       </section>

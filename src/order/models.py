@@ -9,8 +9,8 @@ User_Model = settings.AUTH_USER_MODEL
 
 class Address(models.Model):
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
-    street_address1 = models.CharField(max_length=100, null=True, blank=True)
-    street_address2 = models.CharField(max_length=100, null=True, blank=True)
+    street_address = models.CharField(max_length=100, null=True, blank=True)
+    apartment_address = models.CharField(max_length=100, null=True, blank=True)
     country = CountryField(multiple=False, blank=True, null=True)
     post_code = models.CharField(max_length=10, blank=True, null=True)
     default = models.BooleanField(default=False)
