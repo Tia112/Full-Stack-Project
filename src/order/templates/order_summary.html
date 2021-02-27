@@ -23,9 +23,9 @@
             <td>{{ order_item.product.title }}</td>
             <td>{{ order_item.product.price }}</td>
             <td>
-                <a href="{% url 'remove-single-item-from-cart' order_item.product.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                <a href="{% url 'remove-single-item-from-cart' order_item.product.slug %}"><i class="fa fa-minus mr-2"></i></a>
                 {{ order_item.qty }}
-                <a href="{% url 'add-to-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+                <a href="{% url 'add-to-cart' order_item.product.slug %}"><i class="fa fa-plus ml-2"></i></a>
             </td>
             <td>
 

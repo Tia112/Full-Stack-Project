@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+      <h1 align="center"><b>Order History</b></h1>
+      <!--Grid row-->
+      <div class="row">
+
+        {% for order in orders %}
+          {% if order.orderid %}
+            Order ID - {{ order.orderid }}<br>
+            Order Date - {{ order.ordered_date }}<br>
+            Items Ordered<br>
+                {% for product in order.products.all %}
+                  &nbsp;&nbsp;{{ product }}<br>
+                {% endfor %}
+          <br>
+          {% endif %}
+
+        {% endfor %}
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+
+    </div>
+
+
+{% endblock content %}

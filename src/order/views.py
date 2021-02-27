@@ -19,3 +19,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
+
+def OrderHistory(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'order_history.html', {'orders': orders})
