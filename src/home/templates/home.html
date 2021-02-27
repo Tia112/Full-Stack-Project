@@ -5,33 +5,26 @@
 {% if products %}
 <div class="mt-5 pt-4"></div>
 {% else %}
-<img src="{% static 'img/background.jpg' %}" style="width:100%;height:350px;">
+<img src="{% static 'img/background.jpg' %}" alt="ice cream background" style="width:100%;height:350px;">
 {% endif %}
 {% endblock backimage %}
 {% block content %}
 
   <main>
-
     <div class="container">
-
       <!--Section: Products-->
       <section class="text-center mb-4">
         {% if products %}
         <div class="row wow fadeIn">
-
           {% for item in products %}
           <div class="col-lg-3 col-md-6 mb-4">
-
             <div class="card">
-
-              <div class="view overlay">
-                {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" {% endcomment %}
-                <img src="{{ item.image.url }}" class="card-img-top" align="center" style="width:100%;height:230px;">
+     <div class="view overlay">
+            <img src="{{ item.image.url }}" class="card-img-top" align="center" style="width:100%;height:230px;">
                 <a href="{{ item.absolute_url }}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
-
               <div class="card-body text-center">
                 <a href="" class="grey-text">
                   <h5>{{ item.get_category_display }}</h5>
@@ -60,15 +53,13 @@
       {% else %}
         <h1><strong>Desserts Capital</strong></h1>
         <div class="row">
-
           <div class="col-6">
-            Welcome to Desserts Capital!  Curated to be the pinnacle of the finest desserts anywhere.
-	          We are the Desserts Capital of the World.  We offer a truly unique dessert experience with finely balanced
-            ingredients, with touch of elegance!
-            Choose from a number of flavours of ice cream in many different cones, wafers and tubs, or why not try one
-	          of our delicious waffles, milkshakes, crepes, sundaes or cheesecakes...
+
+           <center>Curated to be the pinnacle of the finest desserts anywhere.<br>
+	             We are a unique Dessert lounge.<br>  We offer an array of dessert experiences with finely balanced ingredients,
+               with a touch of elegance!</center>
           </div>
-        <div class="col-6"><img src="{% static 'img/shop.png' %}" style="width:300px;height:200px;"></div>
+        <div class="col-6"><img src="{% static 'img/shop.png' %}" alt="milkshake" style="width:300px;height:200px;"></div>
         </div>
       {% endif %}
       </section>

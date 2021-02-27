@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
@@ -11,19 +11,9 @@
       <section class="mb-4">
         <div class="row wow fadeIn">
           <div class='col-6 offset-3'>
-          <h1>{% trans "Sign In" %}</h1>
 
-          {% if socialaccount_providers %}
-          <p>{% blocktrans with site.name as site_name %}Please sign in with one
-          of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-          for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-            <div class="login-or">{% trans 'or' %}</div>
-
-          </div>
-
-          {% else %}
-          <p>{% blocktrans %}If you have not created an account yet, then please
+           <h1>{% trans "Sign In" %}</h1>
+                    <p>{% blocktrans %}If you have not created an account yet, then please
           <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
           {% endif %}
 

@@ -4,6 +4,9 @@ body,
 .view {
   height: 100%; }
 
+
+  
+
 /* Half Page Carousel itself*/
 .carousel {
   height: 50%; }
@@ -20,4 +23,5 @@ body,
 
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
-  background-color: #904f38; }
+  background-color: #904f38;
+}
