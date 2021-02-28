@@ -29,7 +29,7 @@
             </td>
             <td>
 
-                £{{ order_item.get_total_product_price }}
+                £{{ order_item.get_total_product_price|floatformat:2  }}
             <a style='color: red;' href="{% url 'remove-from-cart' order_item.product.slug %}">
                 <i class="fas fa-trash float-right"></i>
             </a>

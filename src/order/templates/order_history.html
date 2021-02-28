@@ -14,7 +14,12 @@
             Items Ordered<br>
                 {% for product in order.products.all %}
                   &nbsp;&nbsp;{{ product }}<br>
-                {% endfor %}
+        {% endfor %}
+            Items Delivered to:
+                {{ order.delivery_address }}<br>
+            Payment Details:
+                {{ payment }}
+
           <br>
           {% endif %}
 
