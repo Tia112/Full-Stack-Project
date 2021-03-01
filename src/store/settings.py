@@ -10,6 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+""" Email Settings Test """
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'confirmation.dessertscapital@gmail.com'
+EMAIL_HOST_PASSWORD = 'fuzowmpdjealixqy'
+DEFAULT_FROM_EMAIL = 'Desserts Capital Confirmation<order-confirmation.dessertscapital@gmail.com>'
+EMAIL_PORT = 587
+
+BASE_URL = '127.0.0.1:8000'
+
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

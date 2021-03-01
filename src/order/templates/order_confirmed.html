@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+    <h2 align="center" style="color: #1c7430;"><b>Your Order was Successful!</b></h2>
+<br>
+<h5><b>Order ID: {{ order.orderid}}</b></h5>
+
+<h4 align="center"><strong>Order details:</strong></h4>
+<table align="center" class="table table-border">
+    <tbody >
+    <tr>
+      <td>Name:</td>
+      <td>{{ order.user.username }}</td>
+    </tr>
+    <tr>
+      <td>Street Address 1:</td>
+      <td>{{ order.delivery_address.street_address }}</td>
+    </tr>
+
+    <tr>
+      <td>Street Address 2:</td>
+      <td>{{ order.delivery_address.apartment_address }}</td>
+    </tr>
+    <tr>
+      <td>Total Amount</td>
+      <td>£ {{ order.get_total }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
