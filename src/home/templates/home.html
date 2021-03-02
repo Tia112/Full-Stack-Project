@@ -5,6 +5,7 @@
 {% if flag %}
 <div class="mt-5 pt-4"></div>
 {% else %}
+ <source srcset="{% static 'img/mobile.jpg' %}" media="(min-width: 360px)">
 <img src="{% static 'img/background.jpg' %}" alt="ice cream background" style="width:100%;height:350px;">
 {% endif %}
 {% endblock backimage %}
@@ -36,7 +37,7 @@
                   </strong>
                 </h5>
 
-                <h4 class="font-weight-bold blue-text">
+                <h4 class="font-weight-normal dim-grey-text">
                   <strong>£
                   {{ item.price }}
                   </strong>
@@ -56,14 +57,11 @@
        {% else %}
         <h1><strong>Desserts Capital</strong></h1>
         <div class="row">
-          <div class="col-6">
-
-           <center>Curated to be the pinnacle of the finest desserts anywhere.<br>
-	             We are a unique Dessert lounge.<br>  We offer an array of dessert experiences with finely balanced ingredients,
-               with a touch of elegance!</center>
+           <p><b><i>Curated to be the pinnacle of the finest desserts anywhere.  We are a unique Dessert lounge.
+            We offer an array of dessert experiences with finely balanced ingredients, with a touch of elegance!</i></b></p>
           </div>
-        <div class="col-6"><img src="{% static 'img/shop.png' %}" alt="milkshake" style="width:300px;height:200px;"></div>
-        </div>
+      <!--  <div class="col-6"><img src="{% static 'img/shop.png' %}" alt="milkshake" style="width:300px;height:200px;"></div>
+        </div> -->
       {% endif %}
       </section>
       <!--Section: Products-->

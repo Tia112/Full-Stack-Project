@@ -6,12 +6,12 @@ from django.shortcuts import render,reverse
 # Create Category Choices for Menu
 
 CATEGORY_CHOICES = (
-    ('SN', 'SUNDAES'),
-    ('WF', 'WAFFLES'),
-    ('CP', 'CREPES'),
-    ('CK', 'CHEESECAKE'),
-    ('CS', 'CAKES'),
-    ('MK', 'MILKSHAKES')
+    ("SN", "SUNDAES"),
+    ("WF", "WAFFLES"),
+    ("CP", "CREPES"),
+    ("CK", "CHEESECAKE"),
+    ("CS", "CAKES"),
+    ("MK", "MILKSHAKES")
 )
 
 # Defining product item model
@@ -29,10 +29,10 @@ class Product(models.Model):
         return self.title
 
     def absolute_url(self):
-        return reverse("product", kwargs={'slug': self.slug})
+        return reverse("product", kwargs={"slug": self.slug})
 
     def add_to_cart(self):
-        return reverse("add-to-cart", kwargs={'slug': self.slug})
+        return reverse("add-to-cart", kwargs={"slug": self.slug})
 
     def remove_from_cart(self):
-        return reverse("remove-from-cart", kwargs={'slug': self.slug})
+        return reverse("remove-from-cart", kwargs={"slug": self.slug})

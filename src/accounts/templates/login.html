@@ -10,12 +10,11 @@
     <div class="container">
       <section class="mb-4">
         <div class="row wow fadeIn">
-          <div class='col-6 offset-3'>
-
+          <div class="col-6 offset-3">
            <h1>{% trans "Sign In" %}</h1>
                     <p>{% blocktrans %}If you have not created an account yet, then please
-          <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-          {% endif %}
+                  <a href="{{ signup_url }}">sign up</a> first to order.{% endblocktrans %}</p>
+                {% endif %}
 
           <form class="login" method="POST" action="{% url 'account_login' %}">
             {% csrf_token %}

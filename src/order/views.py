@@ -15,9 +15,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             context = {
-                'object': order
+                "object": order
             }
-            return render(self.request, 'order_summary.html', context)
+            return render(self.request, "order_summary.html", context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
@@ -25,13 +25,13 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 def OrderHistory(request):
     orders = Order.objects.filter(user=request.user)
-    return render(request, 'order_history.html', {'orders': orders})
+    return render(request, "order_history.html", {"orders": orders})
 
 def send_confirmation(email):
     context = {}
     txt_ = get_template("confirmed.txt").render(context)
     html_ = get_template("confirmed.html").render(context)
-    subject = 'Your Order was Successfull!!'
+    subject = "Your Order was Successfull!!"
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [email]
     sent_mail = send_mail(
@@ -49,4 +49,4 @@ def OrderConfirm(request, orderid):
     email = orders.user.email
     send_confirmation(email=email)
 
-    return render(request, 'order_confirmed.html', {'order': orders})
+    return render(request, "order_confirmed.html", {"order": orders})
