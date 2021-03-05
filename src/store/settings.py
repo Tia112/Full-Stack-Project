@@ -23,6 +23,7 @@ BASE_URL = "127.0.0.1:8000"
 
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -101,13 +102,21 @@ WSGI_APPLICATION = "store.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
 
+"""
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DessertsCapital',
+        'USER': 'postgres',
+        'PASSWORD': 'qwerty22',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+
+         }
+"""
+
+DATABASES = {
+    'default': dj_database_url.parse('postgres://axvfrpxotjlhxx:b2568b712504f5a2768415609c2242a3dd7dfdc5c628fffbf483cd0c9b5b2dec@ec2-54-247-158-179.eu-west-1.compute.amazonaws.com:5432/db8b91rtmkft6a')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
