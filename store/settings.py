@@ -19,7 +19,7 @@ EMAIL_HOST_PASSWORD = "fuzowmpdjealixqy"
 DEFAULT_FROM_EMAIL = "Desserts Capital Confirmation<order-confirmation.dessertscapital@gmail.com>"
 EMAIL_PORT = 587
 
-BASE_URL = "127.0.0.1:8000"
+BASE_URL = "dessertscapital.herokuapp.com"
 
 
 import os
@@ -36,9 +36,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ")#i0kptr#l2rdn0&vm*v!+u6uxizn_c#yh5m1@mzs9s(+&90b#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["dessertscapital.herokuapp.com"]
 
 
 # Application definition
