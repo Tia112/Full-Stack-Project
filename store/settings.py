@@ -37,7 +37,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ")#i0kptr#l2rdn0&vm*v!+u6uxizn_c#yh5m1@mzs9s(+&90b#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["dessertscapital.herokuapp.com"]
 
@@ -92,7 +92,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "app.apptemplates.load_setting"
+
             ],
+            "libraries":{
+                "cart_tags": "store.templatetags.cart_tags",
+
+            }
         },
     },
 ]
