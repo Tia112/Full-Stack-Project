@@ -92,7 +92,12 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'app.apptemplates.load_setting',
+
             ],
+            'libraries':{
+                'cart_tags':  'store.templatetags.cart_tags',
+
         },
     },
 ]
