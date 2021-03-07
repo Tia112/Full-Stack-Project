@@ -92,12 +92,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'app.apptemplates.load_setting',
-
             ],
-            'libraries':{
-                'cart_tags':  'store.templatetags.cart_tags',
-            }
         },
     },
 ]
@@ -107,6 +102,7 @@ WSGI_APPLICATION = "store.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 
 
 DATABASES = {
