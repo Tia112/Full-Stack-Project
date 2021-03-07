@@ -97,7 +97,7 @@ TEMPLATES = [
             ],
             'libraries':{
                 'cart_tags':  'store.templatetags.cart_tags',
-
+            }
         },
     },
 ]
