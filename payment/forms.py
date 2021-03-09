@@ -5,6 +5,9 @@ from django_countries.fields import CountryField
 PAYMENT_TYPEs = (("S", "Stripe"),)
 
 class CheckoutForm(forms.Form):
+    """
+    Checkout form for placing Order
+    """
     street_address1 = forms.CharField(required=False)
     street_address2 = forms.CharField(required=False)
     shipping_country = CountryField(blank_label="(select country)").formfield(
@@ -18,6 +21,9 @@ class CheckoutForm(forms.Form):
         widget=forms.RadioSelect, choices=PAYMENT_TYPEs)
 
 class PaymentForm(forms.Form):
+    """
+    Payment form for making the payment
+    """
     stripeToken = forms.CharField(required=False)
     save = forms.BooleanField(required=False)
     use_default = forms.BooleanField(required=False)
