@@ -8,6 +8,9 @@ User_Model = settings.AUTH_USER_MODEL
 
 
 class Address(models.Model):
+    """
+    Address class to store Address saved by the user for delivery
+    """
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100, null=True, blank=True)
     apartment_address = models.CharField(max_length=100, null=True, blank=True)
@@ -23,6 +26,9 @@ class Address(models.Model):
 
 
 class OrderProduct(models.Model):
+    """
+    OrderProduct class which hold info & quantity of each product in the cart.
+    """
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -39,6 +45,13 @@ class OrderProduct(models.Model):
 
 
 class Order(models.Model):
+    """
+    Model class for creating Customer Order Objects
+    Each order is attached to a particular address and a particular user
+    Each order has many to many relation with OrderProduct class which hold
+    quantity of each product in the cart.
+    Note PEP8 standards could not be followed for some defintions
+    """
     user = models.ForeignKey(User_Model, on_delete=models.CASCADE)
     orderid = models.CharField(max_length=20, blank=True, null=True)
     products = models.ManyToManyField(OrderProduct)

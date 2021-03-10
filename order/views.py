@@ -11,7 +11,14 @@ from .models import Order
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
+    """
+    Class to render Order Summary Page
+    """
+
     def get(self, *args, **kwargs):
+        """
+        :return: Order summary page with all relevant details like Cart
+        """
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             context = {
@@ -24,10 +31,20 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 
 def OrderHistory(request):
+    """
+    :param request: GET
+    :return: Renders the all the previous orders done by the current user.
+    """
     orders = Order.objects.filter(user=request.user)
     return render(request, "order_history.html", {"orders": orders})
 
+
 def send_confirmation(email):
+    """
+    Utility function to send email after order is placed.
+    :param email: User Email
+    :return: None
+    """
     context = {}
     txt_ = get_template("confirmed.txt").render(context)
     html_ = get_template("confirmed.html").render(context)
@@ -44,7 +61,13 @@ def send_confirmation(email):
     )
     return sent_mail
 
+
 def OrderConfirm(request, orderid):
+    """
+    :param request: GET
+    :param orderid: Order ID of current placed order
+    :return: Renders confirmation page after mailing the current user.
+    """
     orders = Order.objects.filter(orderid=orderid).first()
     email = orders.user.email
     send_confirmation(email=email)
