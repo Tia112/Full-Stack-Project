@@ -5,6 +5,12 @@ from django.db import models
 User_Model = settings.AUTH_USER_MODEL
 
 
+"""
+    User model which inherits the AUTH USER MODEL class
+    Class for creating new user
+"""
+
+
 class User(models.Model):
     user = models.OneToOneField(User_Model, on_delete=models.CASCADE)
     customer_id = models.CharField(max_length=55, blank=True, null=True)
