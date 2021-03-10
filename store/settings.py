@@ -5,15 +5,20 @@ For more information on this file, see
 https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
+
+Note PEP8 standards could not be followed for some defintions
 """
 """ Email Settings Test """
-import django_heroku
 import dj_database_url
 import os
+from os import path
+import django_heroku
+if path.exists("env.py"):
+  import env
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "confirmation.dessertscapital@gmail.com"
-EMAIL_HOST_PASSWORD = "tkkqztkurdbredhf"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = "Desserts Capital Confirmation<order-confirmation.dessertscapital@gmail.com>"
 EMAIL_PORT = 587
 BASE_URL = "dessertscapital.herokuapp.com"
@@ -22,9 +27,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "s=+%wf-vdo@0iougy+4=!*q9a-@&(zoqvnn=3y2yi9$+bn=4l$"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["dessertscapital.herokuapp.com"]
 # Application definition
 INSTALLED_APPS = [
@@ -80,9 +85,7 @@ WSGI_APPLICATION = "store.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.parse('postgres://xrkrwkresrvwwk:c08648117508fafc1bdf5a27b999bffaf95084812325708878e174b3185f8f26@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/d4agon84k6nb0p')
-}
+DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -115,18 +118,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_store')
-AWS_ACCESS_KEY_ID = 'AKIARPDYTH3AQGGUQEHK'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = 'dessertscapital-static'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_DEFAULT_ACL = None
 AWS_LOCATION = 'static'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
@@ -138,6 +140,6 @@ AUTHENTICATION_BACKENDS= (
 SITE_ID= 1
 LOGIN_REDIRECT_URL= "/"
 CRISPY_TEMPLATE_PACK= "bootstrap4"
-STRIPE_PUBLIC_KEY= "pk_test_51IOKhCAcNcAz8b39e5pnRwFt6SrgEIFf2twYre4jTuzTqyT9hbczpcDkFvXqx0ssb1L7tgeoPAhSNL5PsAc7POWZ00XQFMiJHx"
-STRIPE_SECRET_KEY= "sk_test_51IOKhCAcNcAz8b39Y9VzO4sT8o7XREtLym8bGaYwfdScYsErLVCJoLi0ZMZ1bAQ9X4xMe4jXTAFjQzcgmf8olHqI00sKxhSXhO"
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 django_heroku.settings(locals(), staticfiles=False)
