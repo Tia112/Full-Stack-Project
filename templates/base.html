@@ -2,6 +2,7 @@
 {% load cart_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +15,6 @@
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
   <style type="text/css">
-
     html,
     body,
     header,
@@ -41,129 +41,128 @@
         height: 100vh;
       }
     }
-
   </style>
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color lighten-3 scrolling-navbar">
-    <div class="container">
-      <a class="navbar-brand waves-effect" href="/">
-        <strong class="white-text">Desserts Capital</strong>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Links -->
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-              <a class="nav-link" href="/">Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/category/SN">Sundaes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/category/WF">Waffles</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/category/CP">Crepes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/category/CK">Cheesecakes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/category/CS">Cakes</a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="/category/MK">Milkshakes</a>
-            </li>
-            </ul>
-          <!-- Links -->
+  <div class="container">
+    <a class="navbar-brand waves-effect" href="/">
+      <strong class="white-text">Desserts Capital</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/SN">Sundaes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/WF">Waffles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/CP">Crepes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/CK">Cheesecakes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/CS">Cakes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/MK">Milkshakes</a>
+        </li>
+      </ul>
+      <!-- Links -->
 
-          <form action="{% url 'search' %}" method="POST" class="form-inline">{% csrf_token %}
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
+      <form action="{% url 'search' %}" method="POST" class="form-inline">{% csrf_token %}
+        <div class="md-form my-0">
+          <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+        </div>
+      </form>
 
-        &nbsp;&nbsp;
-        <ul class="navbar-nav">
-          {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a href="{% url 'order-summary' %}" class="nav-link">
-              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
-              Cart
-            </a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'order_history' %}">
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_logout' %}">
-              Logout
-            </a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_login' %}">
-              Login
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_signup' %}">
-              Signup
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-  </nav>
+      &nbsp;&nbsp;
+      <ul class="navbar-nav">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'order-summary' %}" class="nav-link">
+            <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
+            Cart
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'order_history' %}">
+            Orders
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_logout' %}">
+            Logout
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">
+            Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_signup' %}">
+            Signup
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+</nav>
 
 <body>
-{% block backimage %}
-{% endblock backimage %}
+  {% block backimage %}
+  {% endblock backimage %}
 
-    <div class="mt-4 pt-5">
+  <div class="mt-4 pt-5">
     {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        {% endfor %}
-    {% endif %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 
-    {% block content %}
-    {% endblock content %}
+  {% block content %}
+  {% endblock content %}
 
-    {% block extra_body %}
-    {% endblock %}
+  {% block extra_body %}
+  {% endblock %}
 
-<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
-<script type="text/javascript">
-  new WOW().init();
+  <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript">
+    new WOW().init();
+  </script>
 
-</script>
-
-    {% block extra_scripts %}
-    {% endblock extra_scripts %}
-<footer class="page-footer text-center font-small wow fadeIn mdb-color lighten-3 fixed-bottom" >
+  {% block extra_scripts %}
+  {% endblock extra_scripts %}
+  <footer class="page-footer text-center font-small wow fadeIn mdb-color lighten-3 fixed-bottom">
 
     <!--Copyright-->
-    <div class="footer-copyright py-1">Attiya Riaz 2021
+    <div class="footer-copyright py-1">© Desserts Capital 2021
     </div>
     <!--/.Copyright-->
 
   </footer>
 </body>
+
 </html>
