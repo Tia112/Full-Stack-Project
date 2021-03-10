@@ -12,10 +12,14 @@ from accounts.models import User
 from order.models import OrderProduct, Order, Address
 from products.models import Product
 from payment.models import Payment
+# Note PEP8 standards could not be followed for some defintions
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def is_form_valid(values):
+    """
+    Utility function for form validation
+    """
     valid = True
     for field in values:
         if field == "":
@@ -23,10 +27,19 @@ def is_form_valid(values):
     return valid
 
 def generate_order_id():
+    """
+    Utility function for generating random ID
+    """
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 class Checkout(View):
+    """
+    Checkout Class for placing orders
+    """
     def get(self, *args, **kwargs):
+        """
+        :return: Renders checkout page for payment along with order details
+        """
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             form = CheckoutForm()
@@ -45,6 +58,10 @@ class Checkout(View):
             return redirect("checkout")
 
     def post(self, *args, **kwargs):
+        """
+        Redirect the User to payment page after storing the address details of the user.
+
+        """
         print(self.request.POST)
         form = CheckoutForm(self.request.POST or None)
         try:
@@ -101,10 +118,14 @@ class Checkout(View):
             messages.warning(self.request, "You don't have an active order")
             return redirect("order-summary")
 
-""" Payment Page with Stripe"""
-
 class PaymentPage(View):
+    """
+    Class responsible for Stripe Payments
+    """
     def get(self, *args, **kwargs):
+        """
+        Renders Payment Page for payment after checkout
+        """
         order = Order.objects.get(user=self.request.user, ordered=False)
         if order.delivery_address:
             context = {
@@ -126,7 +147,9 @@ class PaymentPage(View):
             return redirect("checkout")
 
     def post(self, *args, **kwargs):
-
+        """
+        Calling the Stripe Payment with all relevant details for payment completion.
+        """
         form = PaymentForm(self.request.POST)
 
         userprofile = User.objects.get(user=self.request.user)

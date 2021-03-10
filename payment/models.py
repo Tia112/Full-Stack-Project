@@ -4,6 +4,10 @@ User_Model = settings.AUTH_USER_MODEL
 
 
 class Payment(models.Model):
+    """
+    Payment class stores the details about the purchase like bill id, amount
+    paid and the user who placed the order.
+    """
     timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     stripe_bill_id = models.CharField(max_length=50)
     user = models.ForeignKey(

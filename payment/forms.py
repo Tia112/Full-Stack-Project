@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 
 PAYMENT_TYPEs = (("S", "Stripe"),)
 
+
 class CheckoutForm(forms.Form):
     """
     Checkout form for placing Order
@@ -19,6 +20,7 @@ class CheckoutForm(forms.Form):
     set_default_shipping = forms.BooleanField(required=False)
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_TYPEs)
+
 
 class PaymentForm(forms.Form):
     """
