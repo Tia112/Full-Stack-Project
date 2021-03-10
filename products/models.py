@@ -1,10 +1,8 @@
 # Import Django libraries
-
 from django.db import models
-from django.shortcuts import render,reverse
+from django.shortcuts import render, reverse
 
 # Create Category Choices for Menu
-
 CATEGORY_CHOICES = (
     ("SN", "SUNDAES"),
     ("WF", "WAFFLES"),
@@ -14,10 +12,12 @@ CATEGORY_CHOICES = (
     ("MK", "MILKSHAKES")
 )
 
+
 # Defining product item model
-
-
 class Product(models.Model):
+    """
+    Product Class to create products on the portal
+    """
     title = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(max_length=500, blank=True, null=True)
     image = models.ImageField()

@@ -4,5 +4,9 @@ from .models import Product
 
 
 class ProductDetailView(DetailView):
+    """
+    Inherited BASE class DetailView
+    Renders Detail Page for a particular product.
+    """
     model = Product
     template_name = "product.html"
